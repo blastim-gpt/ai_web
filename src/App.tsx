@@ -20,13 +20,14 @@ const Section = ({ children, className = "", id = "", dark = false }: { children
   </motion.section>
 );
 
-const Card = ({ children, className = "", delay = 0, dark = false }: { children: React.ReactNode; className?: string; delay?: number; dark?: boolean; key?: React.Key }) => (
+const Card = ({ children, className = "", delay = 0, dark = false, onClick }: { children: React.ReactNode; className?: string; delay?: number; dark?: boolean; key?: React.Key; onClick?: () => void }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.4, delay }}
     className={`terminal-border p-6 ${dark ? 'bg-white/5 border-white/20' : 'bg-white border-term-black'} mb-6 ${className}`}
+    onClick={onClick}
   >
     {children}
   </motion.div>
@@ -125,6 +126,8 @@ export default function App() {
   });
 
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [isMitModalOpen, setIsMitModalOpen] = useState(false);
+  const [isBabbageModalOpen, setIsBabbageModalOpen] = useState(false);
 
   const faq = [
     { 
@@ -390,7 +393,7 @@ export default function App() {
               <div className="flex-1 space-y-6">
                 <Card delay={0.2} className="border-l-8 border-l-term-green">
                   <h4 className="font-mono font-bold uppercase tracking-tight text-term-green mb-2">{`> OpenAI_Experience`}</h4>
-                  <p className="text-sm">Занимался разработкой первого датасета для ChatGPT 4.0.1 — первой модели с функцией размышлений.</p>
+                  <p className="text-sm">Занимался разработкой датасета для ChatGPT 4.0.1 — первой модели с функцией размышлений.</p>
                 </Card>
                 <Card delay={0.3} className="border-l-8 border-l-term-red">
                   <h4 className="font-mono font-bold uppercase tracking-tight text-term-red mb-2">{`> Anti-Aging_AI`}</h4>
@@ -436,7 +439,7 @@ export default function App() {
             <Card className="border-l-8 border-l-term-red">
               <h3 className="text-3xl font-bold mb-6 uppercase italic">ТАЛОС (~800 лет до н.э.)</h3>
               <p className="text-lg opacity-80 leading-relaxed mb-6">
-                 Искусственный интеллект придумали древние греки. Первый известный робот — Талос, который защищал остров Крит от варваров. Промт-инжиниринг существует уже 2800 лет.
+                 Искусственный интеллект придумали древние греки. Первый известный робот — Талос, которому давал команды сам Зевс, защищал остров Крит от варваров. Промт-инжиниринг существует уже 2800 лет.
               </p>
               <div className="p-6 border-t-2 border-term-black bg-slate-50">
                 <p className="text-xs font-mono font-bold uppercase mb-4 text-term-red">{`[ DIRECTIVES: AUTO_EXEC ]`}</p>
@@ -498,17 +501,23 @@ export default function App() {
           <div className="space-y-6">
             <h3 className="text-3xl font-bold uppercase italic border-b-2 border-term-black pb-4">Путь к думающей машине</h3>
             <p className="opacity-80 leading-relaxed">
-              Выяснилось, что с помощью арифметики можно создать машину, которая будет делать предсказания и даже думать.
+              Человечество развивалось: появились паровые двигатели, поезда, механизмы. Люди поняли, что с помощью логики и арифметики можно создать машину, которая будет делать предсказания и даже думать.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="border-t-4 border-t-term-green">
-                <h4 className="font-bold mb-2 font-mono uppercase text-sm">Бэббидж и Ада</h4>
+              <Card className="border-t-4 border-t-term-green cursor-pointer hover:bg-slate-50 transition-colors group" onClick={() => setIsBabbageModalOpen(true)}>
+                <h4 className="font-bold mb-2 font-mono uppercase text-sm flex justify-between items-center">
+                  <span>Бэббидж и Ада</span>
+                  <span className="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">[{`📜 READ_MORE`}]</span>
+                </h4>
                 <p className="text-xs opacity-60">
                   XIX век. Первая машина и первая программистка. Идея машины, которая может считать.
                 </p>
               </Card>
-              <Card className="border-t-4 border-t-term-red">
-                <h4 className="font-bold mb-2 font-mono uppercase text-sm">1950-е: MIT</h4>
+              <Card className="border-t-4 border-t-term-red cursor-pointer hover:bg-slate-50 transition-colors group" onClick={() => setIsMitModalOpen(true)}>
+                <h4 className="font-bold mb-2 font-mono uppercase text-sm flex justify-between items-center">
+                  <span>1950-е: MIT</span>
+                  <span className="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">[{`📜 READ_MORE`}]</span>
+                </h4>
                 <p className="text-xs opacity-60">
                   Первые нейросети (перцептроны). Технологии 50-х не позволили им развиться.
                 </p>
@@ -896,6 +905,114 @@ export default function App() {
           <span className="cursor-blink ml-1">_</span>
         </p>
       </footer>
+
+      <AnimatePresence>
+        {isMitModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 pointer-events-none"
+          >
+            <motion.div 
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              className="absolute inset-0 bg-term-black/80 pointer-events-auto"
+              onClick={() => setIsMitModalOpen(false)}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-2xl bg-white terminal-border p-8 md:p-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,0.2)] pointer-events-auto overflow-y-auto max-h-[90vh]"
+            >
+              <button 
+                onClick={() => setIsMitModalOpen(false)}
+                className="absolute top-6 right-6 font-mono text-term-red hover:scale-110 transition-transform p-2 border-2 border-term-red uppercase text-xs font-bold"
+              >
+                {`[ ESC_CLOSE ]`}
+              </button>
+              
+              <div className="font-mono text-term-red mb-4 text-xs uppercase tracking-widest">{`[ FILE: HISTORY_MIT_1950.LOG ]`}</div>
+              <h3 className="text-3xl font-bold uppercase italic mb-8 border-b-4 border-term-red pb-4">1950-е: MIT</h3>
+              
+              <div className="space-y-6 text-lg leading-relaxed text-term-black">
+                <p>
+                  В 1950-х годах прошлого века люди начали делать машины в большом количестве (калькуляторы), а затем стали мечтать о создании искусственного интеллекта — мозга из проводов, который будет думать и даже быть умнее людей.
+                </p>
+                <div className="p-4 border-l-4 border-term-red bg-slate-50 italic text-sm">
+                  Много работ в этом направлении велось в MIT в США.
+                </div>
+                <p>
+                  Всё это было вдохновлено развитием нейронауки: люди посмотрели на мозг человека, увидели, что нейроны соединяются через аксоны и дендриты, и решили создать искусственный нейрон на железе с помощью проводов.
+                </p>
+                <p>
+                  Так были созданы первые нейросети (многослойные перцептроны). Однако они не получили развития, потому что в 1950-х годах оборудование было недостаточно технологичным.
+                </p>
+              </div>
+              
+              <div className="mt-10 pt-6 border-t-2 border-slate-100 flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase">
+                <span>{`STATUS: DECLASSIFIED`}</span>
+                <span>{`REF_ID: MIT_1950_NEURON`}</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {isBabbageModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 pointer-events-none"
+          >
+            <motion.div 
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              className="absolute inset-0 bg-term-black/80 pointer-events-auto"
+              onClick={() => setIsBabbageModalOpen(false)}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-2xl bg-white terminal-border p-8 md:p-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,0.2)] pointer-events-auto overflow-y-auto max-h-[90vh]"
+            >
+              <button 
+                onClick={() => setIsBabbageModalOpen(false)}
+                className="absolute top-6 right-6 font-mono text-term-green hover:scale-110 transition-transform p-2 border-2 border-term-green uppercase text-xs font-bold"
+              >
+                {`[ ESC_CLOSE ]`}
+              </button>
+              
+              <div className="font-mono text-term-green mb-4 text-xs uppercase tracking-widest">{`[ FILE: HISTORY_BABBAGE_ADA.LOG ]`}</div>
+              <h3 className="text-3xl font-bold uppercase italic mb-8 border-b-4 border-term-green pb-4">Бэббидж и Ада</h3>
+              
+              <div className="space-y-6 text-lg leading-relaxed text-term-black">
+                <p>
+                  Люди очень давно мечтали об ИИ и общались с ним через симуляцию (писали книги, создавали образы голема, Сфинкса). Затем человечество начало развиваться: появились паровые двигатели, поезда, механизмы, логика. 
+                </p>
+                <div className="p-4 border-l-4 border-term-green bg-slate-50 italic text-sm">
+                  Люди поняли, что с помощью логики и арифметики можно создать машину, которая будет делать предсказания и даже думать.
+                </div>
+                <p>
+                  Первая такая машина была сделана в XIX веке (около 150 лет назад) Бэббиджем. Его ассистентка Ада Лавлейс была первой программисткой в мире — она программировала эту машину. 
+                </p>
+                <p>
+                  Машина должна была проводить вычисления и выдавать результаты, хотя, по-видимому, так и не заработала. Это была одна из первых идей о том, что можно сделать машину, которая будет считать.
+                </p>
+              </div>
+              
+              <div className="mt-10 pt-6 border-t-2 border-slate-100 flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase">
+                <span>{`STATUS: HISTORICAL_RECORD`}</span>
+                <span>{`REF_ID: BABBAGE_ADA_ADA_XIX`}</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
