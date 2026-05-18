@@ -99,7 +99,7 @@ const ASCII = {
      \\  '-' /
      /|____|\\
     / |    | \\`,
-  mole: `
+  mole_alt: `
     (  o  o  )
    (    --    )
     (  vvvv  )
@@ -128,6 +128,7 @@ export default function App() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [isMitModalOpen, setIsMitModalOpen] = useState(false);
   const [isBabbageModalOpen, setIsBabbageModalOpen] = useState(false);
+  const [isAlphaEvolveModalOpen, setIsAlphaEvolveModalOpen] = useState(false);
 
   const faq = [
     { 
@@ -321,11 +322,20 @@ export default function App() {
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-5xl md:text-7xl font-bold leading-tight mb-8"
+            className="text-5xl md:text-7xl font-bold leading-tight mb-4"
           >
             ИИ СО СКОРОСТЬЮ <br />
             <span className="text-term-green">СВЕТА</span>
           </motion.h1>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="text-term-red font-mono font-bold mb-8 uppercase text-xs md:text-sm tracking-tighter"
+          >
+            {`// Интерактивный конспект вебинара Александра Декана. Дата: 13 мая`}
+          </motion.div>
           
           <motion.div 
             initial={{ opacity: 0 }}
@@ -397,7 +407,7 @@ export default function App() {
                 </Card>
                 <Card delay={0.3} className="border-l-8 border-l-term-red">
                   <h4 className="font-mono font-bold uppercase tracking-tight text-term-red mb-2">{`> Anti-Aging_AI`}</h4>
-                  <p className="text-sm">В аспирантуре по ИИ для лечения старения. Цель — чтобы люди жили долго и имели меньше болезней.</p>
+                  <p className="text-sm">В аспирантуре по ИИ для лечения старения — таких специалистов всего 10 тысяч на всей планете. Цель — чтобы люди жили долго и имели меньше болезней.</p>
                 </Card>
                 <p className="italic opacity-60 text-sm">
                   "Я уверен, что любое применение ИИ важно."
@@ -526,44 +536,49 @@ export default function App() {
           </div>
           
           <div className="space-y-8">
-            <div className="terminal-border p-8 bg-slate-50">
-              <h3 className="text-2xl font-bold uppercase mb-6 font-mono tracking-tighter">{`[ BRANCHING_PATH: 1990s ]`}</h3>
-              <div className="space-y-6 font-mono text-sm leading-tight">
-                <div className="flex gap-4">
-                  <span className="text-term-red">{`[ FAIL ]`}</span>
-                  <p>Физ. нейросети: из проводов и узлов (сложно).</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="text-term-green">{`[ WIN ]`}</span>
-                  <p>Логические цепи: развитие калькуляторов. Путь к смартфонам.</p>
-                </div>
-              </div>
-              <p className="mt-8 text-xs p-4 terminal-border border-dashed">
-                 {`LOG: Mobile phones now > 1990s supercomputers. We are SIMULATING brains on calculators.`}
-              </p>
-            </div>
+            {/* Removed Парадигма логики */}
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
-          <Card delay={0.1} className="border-term-green bg-term-green/5 flex gap-6 items-start border-l-8">
-            <div>
-              <h4 className="text-xl md:text-2xl font-bold uppercase mb-4 text-term-green leading-tight break-words">{`> Calculators`}</h4>
-              <p className="opacity-60 mb-4 font-mono italic text-xs">Slightly faster than light</p>
-              <p className="opacity-80 text-sm leading-relaxed">
-                Любое вычисление за доли секунды. Главное ограничение — скорость обработки. Видеокарты (GPU) помогают распараллеливать задачи.
-              </p>
+        <div className="mt-16 space-y-8">
+          <div className="terminal-border p-8 bg-slate-50 border-term-black">
+            <h3 className="text-xl font-bold uppercase italic font-mono mb-6 border-b-2 border-term-black pb-4 flex justify-between items-center text-term-black">
+              <span>{`[ SUMMARY: 2 ТИПА ВЫЧИСЛЕНИЙ ]`}</span>
+              <span className="text-xs opacity-50 px-2 py-1 bg-term-black text-white">{`CLASSIFICATION_v1.0`}</span>
+            </h3>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <div className="flex gap-4 items-start">
+                  <div className="w-10 h-10 bg-term-red text-white flex items-center justify-center font-bold shrink-0">01</div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase text-term-red mb-2">{`Нейросети`}</h4>
+                    <p className="text-sm opacity-80 leading-relaxed font-mono">
+                      (КАК У ЧЕЛОВЕКА): Архитектура из виртуальных нейронов, которые взаимодействуют через веса и связи, имитируя работу мозга.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-10 h-10 bg-term-green text-white flex items-center justify-center font-bold shrink-0">02</div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase text-term-green mb-2">{`Компьютеры-калькуляторы`}</h4>
+                    <p className="text-sm opacity-80 leading-relaxed font-mono">
+                      (КЛАССИКА): Всё основано на строгом сложении, вычитании и логических операциях (И-ИЛИ-НЕ). Детерминированный путь.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 bg-white terminal-border border-dashed space-y-4">
+                <p className="text-xs leading-relaxed opacity-90 italic">
+                  <span className="font-bold text-term-red">ВАЖНО:</span> В 1990-х мир выбрал путь "калькуляторов" из-за их простоты. Сегодня мы достигли такой мощности, что можем <span className="underline decoration-term-green decoration-2 underline-offset-4">симулировать</span> первый тип (нейросети) внутри второго (телефоны/ПК).
+                </p>
+                <div className="text-[10px] uppercase font-mono text-slate-400">
+                  {`// Эмуляция биологии через логику проведена успешно.`}
+                </div>
+              </div>
             </div>
-          </Card>
-          <Card delay={0.2} className="border-term-red bg-term-red/5 flex gap-6 items-start border-l-8">
-            <div>
-              <h4 className="text-xl md:text-2xl font-bold uppercase mb-4 text-term-red leading-tight break-words">{`> Biological_Brain`}</h4>
-              <p className="opacity-60 mb-4 font-mono italic text-xs">Energy efficient benchmark</p>
-              <p className="opacity-80 text-sm leading-relaxed">
-                Тратит энергии как лампочка. Мозг остается «черной коробкой» — мы до сих пор не понимаем, как формируется личность.
-              </p>
-            </div>
-          </Card>
+          </div>
         </div>
       </Section>
 
@@ -571,86 +586,246 @@ export default function App() {
       <Section dark>
         <AsciiGraphic type="mole" className="bottom-10 left-10 text-term-green" delay={0.8} />
         <div className="max-w-6xl mx-auto">
-          <Headline title="Deep Research" subtitle="Эволюция алгоритмов" dark />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-              <p className="text-xl opacity-80 leading-relaxed font-bold">
-                {`> Alpha_Evolve_with_Deep_Research`}
-              </p>
-              <a 
-                href="https://t.me/blastim/3031" 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-block text-xs font-mono text-term-green hover:underline border border-term-green/30 px-2 py-1 bg-term-green/5"
-              >
-                {`[ READ: BLASTIM_ARTICLE ]`}
-              </a>
-              
-              <div className="terminal-border p-8 bg-white/5 border-white/20 text-white font-mono">
-                <h3 className="text-xl font-bold uppercase mb-6 flex items-center gap-3">
-                  {`[ TASK: ORCHESTRATION ]`}
-                </h3>
-                <ol className="space-y-6 text-sm text-slate-300">
-                  <li>{`1. GENERATE: 3 solutions.`}</li>
-                  <li>{`2. MEASURE: Rank quality (Top to Bottom).`}</li>
-                  <li>{`3. EVOLVE: Apply pseudo-perturbations to branches.`}</li>
-                  <li>{`4. PRUNE: Kill bad branches. Keep winners.`}</li>
-                </ol>
+          <Headline title="Scientific Evolution" subtitle="AlphaEvolve & Deep Research" dark />
+          
+          <div className="space-y-32">
+            {/* Phase 1: AlphaEvolve - The Collaborator */}
+            <div className="space-y-12">
+              <div className="border-l-4 border-term-green pl-6 py-2">
+                <h3 className="text-4xl font-black uppercase mb-4 text-term-green font-mono tracking-tighter italic">{`> AlphaEvolve: The Collaborator`}</h3>
+                <p className="text-xl opacity-90 leading-relaxed font-bold">
+                  ИИ как ученый-коллаборатор
+                </p>
               </div>
-              <p className="text-sm opacity-60">
-                {`"Исследователи соединили эволюцию алгоритмов с поиском по интернету."`}
-              </p>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="space-y-6">
+                  <p className="text-lg opacity-80 leading-relaxed">
+                    В прошлом году Google DeepMind выпустили работу **AlphaEvolve**. Это не просто кодер, а система, способная заниматься наукой в паре с человеком.
+                  </p>
+                  
+                  {/* AlphaEvolve Workflow Schema */}
+                  <div className="bg-white/5 p-8 terminal-border border-white/20 font-mono text-sm space-y-6">
+                    <div className="text-[10px] uppercase opacity-40 mb-2">{`// AlphaEvolve_Workflow_v1.0`}</div>
+                    <div className="space-y-4">
+                      <div className="flex gap-4">
+                        <span className="text-term-green font-bold">01.</span>
+                        <p><span className="text-white font-bold">BASE:</span> Использование базы существующих программ и грантов.</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-term-green font-bold">02.</span>
+                        <p><span className="text-white font-bold">AGENT_ENG:</span> ИИ сам придумывает промпт (самопрограммирующиеся агенты).</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-term-green font-bold">03.</span>
+                        <p><span className="text-white font-bold">CODING:</span> Написание и проверка работоспособности кода в реальном времени.</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-term-green font-bold">04.</span>
+                        <p><span className="text-white font-bold">EVAL:</span> Проверка по критериям (например: 3 гранта за раз с оценкой качества).</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-term-green font-bold">05.</span>
+                        <p><span className="text-white font-bold">REPLENISH:</span> База пополняется новыми решениями и их оценками.</p>
+                      </div>
+                    </div>
+                    <div className="mt-6 pt-4 border-t border-white/10 text-xs italic opacity-60">
+                      Именно для этого сделаны современные модели ИИ: ученый или инженер, работающий в паре с человеком.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-8">
+                  <div className="bg-term-green/5 p-8 terminal-border border-term-green/30">
+                    <h4 className="text-xl font-bold uppercase mb-4 text-term-green font-mono">{`[ TASK_FOCUS ]`}</h4>
+                    <p className="opacity-80 leading-relaxed text-sm">
+                      Задача: создать систему, способную заниматься наукой в любой области. Пользователь дает задачу — ИИ определяет критерии и выполняет ее, постоянно обучаясь на своих успехах.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <button 
+                      onClick={() => setIsAlphaEvolveModalOpen(true)}
+                      className="inline-block text-xs font-mono text-term-green hover:underline border border-term-green/30 px-3 py-2 bg-term-green/5 transition-colors uppercase tracking-tight"
+                    >
+                      {`[ VIEW: ALPHA_MODAL ]`}
+                    </button>
+                    <a 
+                      href="https://t.me/blastim/3031" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="inline-block text-xs font-mono text-term-green hover:underline border border-term-green/30 px-3 py-2 bg-term-green/5 transition-colors uppercase tracking-tight"
+                    >
+                      {`[ SOURCE: ARTICLE ]`}
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-10">
-               <Card dark delay={0.1} className="border-l-8 border-l-term-red">
-                  <h3 className="text-2xl font-bold uppercase mb-4">Kissing Numbers</h3>
-                  <p className="opacity-80 mb-6 italic text-sm">
-                    «Человеческое решение было в 6.5 раз хуже решения ИИ. Ограничение — только в критериях оценки».
+            {/* Transition Divider */}
+            <div className="flex justify-center flex-col items-center gap-4 opacity-30">
+               <div className="w-1 h-12 bg-gradient-to-b from-term-green to-term-red" />
+               <div className="text-[10px] font-mono uppercase tracking-[0.3em] font-bold">+ EVOLUTION STEP</div>
+            </div>
+
+            {/* Phase 2: Deep Research - The Decision Tree */}
+            <div className="space-y-12">
+              <div className="border-l-4 border-term-red pl-6 py-2">
+                <h3 className="text-4xl font-black uppercase text-term-red font-mono tracking-tighter italic">{`> Deep Research: Decision Tree`}</h3>
+                <p className="text-xl opacity-90 leading-relaxed font-bold">Синергия поиска и эволюции</p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="space-y-8">
+                  <p className="text-lg opacity-90 leading-relaxed">
+                    Через месяц вышла статья о **Alpha Evolve с Deep Research**. Система теперь не только кодит, но и идет в интернет за мировым опытом.
                   </p>
-               </Card>
 
-               <div className="terminal-border p-6 border-l-8 border-l-term-green overflow-hidden bg-white/5 border-green-500/20">
-                  <h4 className="font-bold mb-6 font-mono uppercase text-sm border-b-2 border-white/10 pb-2">{`> Biology_Data_Integration`}</h4>
+                  {/* Deep Research Tree Schema */}
+                  <div className="bg-term-black p-8 font-mono text-xs text-term-red rounded-sm border border-term-red/30 space-y-8">
+                    <div className="text-[10px] uppercase opacity-50 flex justify-between">
+                      <span>Evolution_Tree_Logic</span>
+                      <span className="animate-pulse">● PROCESSING</span>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      <div className="flex items-start gap-3">
+                        <span className="text-term-red font-bold">01.</span>
+                        <div>
+                          <span className="text-white font-bold uppercase">Initial_Solutions</span>
+                          <p className="opacity-70 mt-1">Модель придумывает ТРИ различных решения проблемы.</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <span className="text-term-red font-bold">02.</span>
+                        <div>
+                          <span className="text-white font-bold uppercase">Measurement</span>
+                          <p className="opacity-70 mt-1">Ранжирование: 1-е (лучшее), 2-е (среднее), 3-е (плохое).</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3">
+                        <span className="text-term-red font-bold">03.</span>
+                        <div>
+                          <span className="text-white font-bold uppercase">Perturbation</span>
+                          <p className="opacity-70 mt-1">Берет каждое решение и вносит "псевдовозмущения" (улучшения).</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3">
+                        <span className="text-term-red font-bold">04.</span>
+                        <div>
+                          <span className="text-white font-bold uppercase">Pruning</span>
+                          <p className="opacity-70 mt-1 text-term-red font-bold italic">Отрубает ветки, которые не ведут к успеху. Плохие умирают, сильные делятся дальше.</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-white/10">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 bg-term-red animate-ping rounded-full" />
+                          <span className="text-white font-bold">CRITICAL_PROBLEM: ORCHESTRATION</span>
+                        </div>
+                        <p className="mt-1 opacity-60 text-[10px]">Главный вызов — заставить агента работать верно и по порядку.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-10">
+                  <div className="p-8 bg-white/5 terminal-border border-white/40 text-white">
+                    <p className="leading-relaxed opacity-90">
+                      **Deep Research** идет в интернет (Perplexity/ChatGPT), ищет все статьи по теме и пишет обзор. Исследователи соединили это с эволюцией алгоритмов.
+                    </p>
+                    <div className="p-4 bg-term-red/10 border-l-4 border-term-red mt-6">
+                       <p className="text-sm font-bold">
+                          Итог: Самое лучшее человеческое решение было в 6,5 раз хуже ИИ.
+                       </p>
+                    </div>
+                  </div>
+
+                  <Card dark delay={0.1} className="border-l-8 border-l-term-red">
+                    <h3 className="text-2xl font-bold uppercase mb-4">Kissing Numbers</h3>
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-white/5 p-4 terminal-border border-white/10">
+                          <div className="text-[10px] uppercase font-mono opacity-50 mb-2">1D Space (k=2)</div>
+                          <svg viewBox="0 0 100 40" className="w-full h-10">
+                            <circle cx="50" cy="20" r="10" fill="none" stroke="#ff4d4d" strokeWidth="2" />
+                            <circle cx="30" cy="20" r="10" fill="none" stroke="white" strokeWidth="1" strokeDasharray="2 2" />
+                            <circle cx="70" cy="20" r="10" fill="none" stroke="white" strokeWidth="1" strokeDasharray="2 2" />
+                          </svg>
+                        </div>
+                        <div className="bg-white/5 p-4 terminal-border border-white/10">
+                          <div className="text-[10px] uppercase font-mono opacity-50 mb-2">2D Space (k=6)</div>
+                          <svg viewBox="0 0 100 100" className="w-full h-24">
+                            <circle cx="50" cy="50" r="15" fill="none" stroke="#ff4d4d" strokeWidth="2" />
+                            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+                              const rad = (angle * Math.PI) / 180;
+                              return (
+                                <circle 
+                                  key={i}
+                                  cx={50 + 30 * Math.cos(rad)} 
+                                  cy={50 + 30 * Math.sin(rad)} 
+                                  r="15" 
+                                  fill="none" 
+                                  stroke="white" 
+                                  strokeWidth="1" 
+                                  strokeDasharray="2 2" 
+                                />
+                              );
+                            })}
+                          </svg>
+                        </div>
+                      </div>
+
+                      <p className="opacity-80 text-sm leading-relaxed">
+                        В 1D — 2 круга. В 2D — 6 кругов. В 3D и выше точной формулы нет. 
+                        Alpha Evolve предсказала результаты в сотнях измерений, превзойдя людей в несколько раз. 
+                        <span className="block mt-2 italic opacity-60 text-xs">Примечание: Однако не во всех задачах ИИ настолько хорош.</span>
+                      </p>
+                    </div>
+                  </Card>
+                </div>
+              </div>
+
+               {/* Biology Case */}
+               <div className="terminal-border p-8 border-l-8 border-l-term-green overflow-hidden bg-white/5 border-green-500/20">
+                  <h4 className="text-2xl font-black mb-8 font-mono uppercase border-b-2 border-white/10 pb-4 text-term-green">{`> Biology_Data_Integration_Case`}</h4>
                   
-                  <div className="space-y-4 text-sm leading-relaxed">
-                    <div className="space-y-2">
-                      <p className="font-bold uppercase tracking-tighter text-xs text-term-green">Применение метода к реальной биологической задаче</p>
-                      <p className="opacity-90">
-                        Исследователи применили этот метод к реальной задаче в биологии — интеграции данных.
-                      </p>
-                      <p className="text-xs opacity-70 italic border-l-2 border-white/20 pl-3">
-                        Проблема: если две исследовательские группы (например, в Москве и Японии) изучают влияние упражнений на рост мышц, данные из разных источников сложно объединять, потому что люди в разных странах различаются по уровню здоровья, медицины, социальным взаимодействиям, спортивной активности и т.д.
-                      </p>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-sm leading-relaxed">
+                    <div className="space-y-6">
+                      <div className="space-y-4">
+                        <p className="font-bold uppercase tracking-tighter text-sm text-term-green">Проблема объединения данных</p>
+                        <p className="opacity-90">
+                          Если две группы (Москва и Япония) изучают рост мышц, данные сложно объединять из-за различий в популяциях, медицине и спортивной активности.
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        <p className="font-bold uppercase tracking-tighter text-sm text-term-green">Результаты и бенчмарки</p>
+                        <p className="opacity-90">
+                          Решения Deep Research (синие на графике) превзошли человеческие методы (красные). Метод **BBKNN** от ИИ стал лучше лучших человеческих аналогов на 15%.
+                        </p>
+                        <div className="p-4 bg-white/5 terminal-border border-dashed border-white/20 space-y-4">
+                          <p className="text-xs opacity-80 leading-relaxed">
+                            <span className="text-term-green font-bold uppercase block mb-1">Почему такая разница в цифрах? (6.5x vs 15%)</span>
+                            Проблемой «целующихся цифр» занимались лишь некоторые математики в свободное время — не было задачи довести решение до идеала. Интеграция данных — это критическая индустриальная проблема, над которой десятилетиями работают огромные научные коллективы. Улучшить их методы даже на 15% — это колоссальный триумф для ИИ.
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="terminal-border bg-white/10 p-2 my-4 border-white/20">
-                      <img 
-                        src="https://blastim.ru/wp-content/uploads/2026/05/risunok1.png" 
-                        alt="График результатов" 
-                        className="w-full h-auto block invert"
-                        referrerPolicy="no-referrer"
-                      />
-                      <p className="text-[10px] font-mono mt-1 opacity-50 text-center uppercase tracking-widest">Fig. 01: Algorithm Performance Schema</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <p className="font-bold uppercase tracking-tighter text-xs text-term-green">Результаты</p>
-                      <p className="opacity-90">
-                        На графике каждый столбик — новый алгоритм. Чем выше столбик, тем лучше. Человеческие решения показаны красным. Всё синее — решения, придуманные <strong>Deep Research</strong>. 
-                      </p>
-                      <p className="opacity-90">
-                        Самое лучшее решение (синее) оказалось создано ИИ — метод <strong>BBKNN</strong> (базируется на существующем методе, модифицированном различными способами). Самое лучшее человеческое решение стало лучше примерно на 10–15%.
-                      </p>
-                    </div>
-
-                    <div className="p-4 bg-white/5 terminal-border border-dashed border-white/20 space-y-3">
-                       <p className="text-xs leading-relaxed opacity-80">
-                        Это звучит не слишком много, но для задачи, над которой работают тысячи людей по всему миру, улучшение на 15% — огромное число. 
-                      </p>
-                      <p className="text-xs leading-relaxed opacity-80">
-                        Почему для «проблемы целующихся цифр» улучшение было в 6,5 раз, а для интеграции данных — всего на 10–15%? Потому что проблемой целующихся цифр занимались лишь некоторые математики в свободное время. Не было задачи решить ее идеально. А интеграция данных — известная проблема, над которой работают огромные коллективы, и улучшить существующие методы здесь крайне сложно.
-                      </p>
+                    <div className="space-y-6">
+                      <div className="terminal-border bg-white/10 p-4 border-white/20">
+                        <img 
+                          src="https://blastim.ru/wp-content/uploads/2026/05/risunok1.png" 
+                          alt="График результатов" 
+                          className="w-full h-auto block invert grayscale"
+                          referrerPolicy="no-referrer"
+                        />
+                        <p className="text-[10px] font-mono mt-3 opacity-50 text-center uppercase tracking-widest italic">Performance spectrum: AI-driven discovery vs Human expertise</p>
+                      </div>
                     </div>
                   </div>
                </div>
@@ -667,7 +842,7 @@ export default function App() {
           <div className="terminal-border p-12 bg-term-green/5 text-left">
             <div className="space-y-8">
               <p className="text-2xl md:text-3xl leading-relaxed italic font-bold">
-                «Старением занимается всего около 10 000 человек. Нам не хватает математиков, но теперь есть Искусственный Интеллект».
+                «Старением занимается всего около 10 000 человек на всей Земле. Нам не хватает математиков, но теперь есть Искусственный Интеллект».
               </p>
               <div className="font-mono text-sm space-y-4 text-term-green">
                 <p>{`$ start search --topic=longevity`}</p>
@@ -1009,6 +1184,88 @@ export default function App() {
                 <span>{`STATUS: HISTORICAL_RECORD`}</span>
                 <span>{`REF_ID: BABBAGE_ADA_ADA_XIX`}</span>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {isAlphaEvolveModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 pointer-events-none"
+          >
+            <motion.div 
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              className="absolute inset-0 bg-term-black/80 pointer-events-auto"
+              onClick={() => setIsAlphaEvolveModalOpen(false)}
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-2xl bg-white terminal-border p-8 md:p-12 shadow-[20px_20px_0px_0px_rgba(0,255,0,0.2)] pointer-events-auto overflow-y-auto max-h-[90vh]"
+            >
+              <button 
+                onClick={() => setIsAlphaEvolveModalOpen(false)}
+                className="absolute top-6 right-6 font-mono text-term-green hover:scale-110 transition-transform p-2 border-2 border-term-green uppercase text-xs font-bold"
+              >
+                {`[ ESC_CLOSE ]`}
+              </button>
+              
+              <div className="font-mono text-term-green mb-4 text-xs uppercase tracking-widest">{`[ FILE: ALPHA_EVOLVE_WORKFLOW.LOG ]`}</div>
+              <h3 className="text-3xl font-black uppercase italic mb-8 border-b-4 border-term-green pb-4">Схема работы AlphaEvolve</h3>
+              
+              <div className="space-y-6 font-mono text-sm">
+                <div className="p-4 bg-slate-50 border-l-4 border-term-black">
+                  <span className="text-term-red font-bold">01. BASE_DATABASE</span>
+                  <p className="mt-1 opacity-80 leading-relaxed">База данных с программами (или грантами), которые существуют сегодня. Фундамент для эволюции.</p>
+                </div>
+                
+                <div className="flex justify-center text-term-green py-1 animate-bounce">↓</div>
+                
+                <div className="p-4 bg-slate-50 border-l-4 border-term-green">
+                  <span className="text-term-green font-bold">02. AGENT_ENGINEERING</span>
+                  <p className="mt-1 opacity-80 leading-relaxed">ИИ сам придумывает промпт — агенты, которые сами себя программируют через циклы размышлений.</p>
+                </div>
+
+                <div className="flex justify-center text-term-green py-1">↓</div>
+                
+                <div className="p-4 bg-slate-50 border-l-4 border-term-black">
+                  <span className="text-term-red font-bold">03. CODE_GENERATION</span>
+                  <p className="mt-1 opacity-80 leading-relaxed">ИИ придумывает и кодирует новые программы, проверяя их работоспособность в реальном времени.</p>
+                </div>
+
+                <div className="flex justify-center text-term-green py-1">↓</div>
+                
+                <div className="p-4 bg-term-black text-white terminal-border border-dashed">
+                  <span className="text-term-green font-bold">04. EVALUATION_PHASE</span>
+                  <p className="mt-1 opacity-80 leading-relaxed">Проверка качества (Evaluation). Например, запуск 3-х грантов одновременно и оценка их по научным критериям.</p>
+                </div>
+
+                <div className="flex justify-center text-term-green py-1 animate-pulse">↓</div>
+                
+                <div className="p-4 bg-slate-50 border-l-4 border-term-green">
+                  <span className="text-term-green font-bold">05. REPLENISHMENT</span>
+                  <p className="mt-1 opacity-80 leading-relaxed">База данных пополняется новыми решениями с их оценками, становясь умнее с каждой итерацией.</p>
+                </div>
+                
+                <div className="mt-10 p-6 border-4 border-term-green bg-term-green/5 italic">
+                  <p className="text-lg font-bold uppercase tracking-tighter">ИТОГ: ИИ-КОЛЛАБОРАТОР</p>
+                  <p className="mt-2 opacity-80 text-xs">
+                    Это ученый или инженер, работающий в паре с человеком. Именно для создания таких цифровых партнеров предназначены современные LLM.
+                  </p>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => setIsAlphaEvolveModalOpen(false)}
+                className="mt-8 w-full py-4 bg-term-green text-white font-bold uppercase tracking-widest hover:bg-term-black transition-colors"
+              >
+                {`CLOSE_ALGO_VIEW`}
+              </button>
             </motion.div>
           </motion.div>
         )}
